@@ -13,10 +13,11 @@ El proceso evolutivo espera que los individuos tengan una serie de operaciones q
 ni se requiere que hereden de la misma sino que se trata de un esquema ilustrativo y desligado. El enfoque a seguir al modelar y calcular la apitud 
 de dichos individuos ha de ser el de la maximización de su aptitud.
 
-Se realiza un proceso de selección de reproductores por ruleta llamando a la mutación de los descendientes según una probabilidad especificada
-como parámetro. El operador de reproducción ha de ser binario admitiendo además la reproducción de un individuo con sí mismo. Cabe destacar 
-que e operador de mutación de los individuos no debe en ningún caso destruirlos. En lo referente al reemplazo de individuos para el siguiente 
-ciclos se hace por la selección directa de los N mejores.
+Se realiza un proceso de selección de reproductores llamando además a la mutación de los descendientes según una probabilidad especificada
+como parámetro. El proceso de selección predeterminado es "por ruleta" pero desde la versión 3.0 se ofrecen además "por torneo" y "aleatorio puro"
+de forma completamente configurable. El operador de reproducción ha de ser binario (participan 2 individuos para generar un descendiente) admitiendo 
+además la reproducción de un individuo con sí mismo. Cabe destacar que el operador de mutación de los individuos no debe en ningún caso destruirlos. 
+En lo referente al reemplazo de individuos para el siguiente ciclos se hace por la selección directa de los N mejores.
 
 Se espera que el número de reproductores sea par y en ningún caso superior al de individuos. No obstante, no se llevan a cabo comprobaciones sino
 que es responsabilidad del usuario garantizar un contexto correcto de funcionamiento.
