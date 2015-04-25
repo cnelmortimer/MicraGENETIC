@@ -122,16 +122,15 @@ template <class T> void MicraGENETIC<T>::generarPoblacionInicial(){
 template <class T> void MicraGENETIC<T>::escogerReproducirMutar(){
 	switch(opSelector){//Alternativa: Usar "Punteros a funciones"
 		case SelRuleta:
-			seleccionRuleta(poblacion, valorTotalPoblacion, nIndividuos,
+			seleccionRuleta<T>(poblacion, valorTotalPoblacion, nIndividuos,
 										   nReproductores, tTorneo, probabilidadMutacion,
 										   descendencia); break;
 		case SelAleatorioPuro:
-			seleccionAleatoriaPura(poblacion, nIndividuos, nReproductores, probabilidadMutacion,
+			seleccionAleatoriaPura<T>(poblacion, nIndividuos, nReproductores, probabilidadMutacion,
 								   descendencia); break;
 		case SelTorneo:
-			seleccionPorTorneo(poblacion, nIndividuos, nReproductores, tTorneo, probabilidadMutacion,
-							   descendencia);
-			break;
+			seleccionPorTorneo<T>(poblacion, nIndividuos, nReproductores, tTorneo, probabilidadMutacion,
+							   descendencia);break;
 	}
 	sort(this->descendencia, this->finDescendencia, std::greater<T>());//Ordenar la descendencia
 }
