@@ -3,69 +3,67 @@
 #include "MicraGENETIC.h"
 
 class IndividuoSimple{//Individuo de ejemplo en: Obtener el maximo de la funcion y = x en [0, 100]
-    public:
-        IndividuoSimple(){
-            this->valor = 0;
+	public:
+		IndividuoSimple(){
+		    this->valor = 0;
         }
 
-        IndividuoSimple(int valor){
+		IndividuoSimple(int valor){
             this->valor = valor;
-        }
+		}
 
-        IndividuoSimple(const IndividuoSimple& referencia){//Operador de copia  (No requerido)
-            this->valor = referencia.valor;
-        }
+		IndividuoSimple(const IndividuoSimple& referencia){//Operador de copia
+			this->valor = referencia.valor;
+		}
 
-        IndividuoSimple& operator = (const IndividuoSimple& referencia){//Operador de asignacion  (No requerido)
-            if(this != &referencia){
-                this->valor = referencia.valor;
-            }
-            return *this;
-        }
+		IndividuoSimple reproducir(IndividuoSimple progenitorB){
+			IndividuoSimple descendiente((valor + progenitorB.valor)/2);//Valor medio
+			return descendiente;
+		}
 
-        IndividuoSimple reproducir(IndividuoSimple progenitorB){
-            IndividuoSimple descendiente((valor + progenitorB.valor)/2);//Valor medio como ejemplo (Sin tener en cuenta la forma de la funcion...)
-            return descendiente;
-        }
+		void generarAleatoriamente(){
+			this->valor = rand() % 101;
+		}
 
-        void generarAleatoriamente(){
-            this->valor = rand() % 101;
-        }
-
-        void mutar(){//Se puede avanzar en +-5
+		void mutar(){//Se puede avanzar en +-5
             int preValor = rand() % 6;
             if(drand48()>0.5){
                 preValor = -preValor;
             }
             preValor += valor;
-            if(preValor>=0 && preValor<=100){//Si lamutacion hace al individuo inconsistente no se aplica
+            if(preValor>=0 && preValor<=100){
                 this->valor = preValor;
             }
-        }
+		}
 
-        bool operator > (const IndividuoSimple& str) const{
+		bool operator > (const IndividuoSimple& str) const{
             return (valor > str.valor);
         }
 
-        int obtenerAptitud(){
-            return valor;
-        }
+		int obtenerAptitud(){
+			return valor;
+		}
 
-        int leerVariable(){//Metodo adicional que no se requiere por la libreria aunque se añade por cuenta propia sin problemas
-            return valor;
-        }
+		int leerVariable(){
+			return valor;
+		}
 
-        ~IndividuoSimple(){}
+		~IndividuoSimple(){}
 
-    private:
-        int valor;
+	private:
+		int valor;
 };
 
-int main(){//Uso:
-    //Poblacion de 100 individuos, 20 de ellos pueden reproducirse en cada ciclo. Probabilidad de mutacion del 0.5 (50%) 
-    MicraGENETIC<IndividuoSimple> optimizador(100, 20, 0.5);//Preparar el problema
-    optimizador.reiniciarSemillasAleatorias();//Reiniciar las semillas de valores aleatorios
-    IndividuoSimple resultado = optimizador.optimizarPorCiclos(1000000);//Ejecutar 1000000 ciclos
-    printf("Mejor Resultado: %d\n", resultado.leerVariable());//Mostrar los resultados
-    return 0;
+int main(){
+    //50 individuos, 20 de ellos se reproducen por ciclo, probabilidad de solicitar mutacion del 0.5, seleccion por torneo
+    MicraGENETIC<IndividuoSimple> optimizador(50, 20, 0.5, SelTorneo);
+    ///Ejemplos adicionales:
+    //MicraGENETIC<IndividuoSimple> optimizador(50, 20, 0.5, SelTorneo, 6);//Torneos de 6 participantes por progenitor
+    //MicraGENETIC<IndividuoSimple> optimizador(50, 20, 0.5, SelAleatorioPuro);//Seleccion aleatoria de cada progenitor
+    //MicraGENETIC<IndividuoSimple> optimizador(50, 20, 0.5, SelRuleta);
+    //MicraGENETIC<IndividuoSimple> optimizador(50, 20, 0.5);//Equivale a usar ruleta: Por defecto, seleccion de reproductores por ruleta
+    optimizador.reiniciarSemillasAleatorias();
+    IndividuoSimple resultado = optimizador.optimizarPorCiclos(10000);
+    printf("Mejor Resultado: %d\n", resultado.leerVariable());
+	return 0;
 }
