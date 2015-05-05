@@ -57,8 +57,6 @@ template <class T> class MicraGENETIC{
 		int tTorneo;//Tamagno del torneo para este tipo de seleccion
 };
 
-#endif
-
 ///IMPLEMENTACION:
 ///Constructor del entorno de optimizacion
 template <class T> MicraGENETIC<T>::MicraGENETIC(int nIndividuos, int nReproductores, double probabilidadMutacion,
@@ -214,3 +212,5 @@ template <class T> void MicraGENETIC<T>::setTTorneo(int tTorneo){
 template <class T> int MicraGENETIC<T>::getTTorneo(){
 	return tTorneo;
 }
+
+#endif
