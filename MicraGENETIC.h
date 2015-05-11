@@ -11,7 +11,7 @@
 //Detalles: Seleccion de reproductores por ruleta (predeterminado)/torneo/aleatorio puro
 //			Probabilidad de solicitar la mutacion de los nuevos individuos configurable
 //			Reemplazo por seleccion de los N mejores
-//Autor: Nicolas C ;; -#VERSION: 3.0
+//Autor: Nicolas C ;; -#VERSION: 3.1
 enum TiposSeleccion{SelRuleta, SelTorneo, SelAleatorioPuro};
 
 template <class T> class MicraGENETIC{
