@@ -74,6 +74,7 @@ template <class T> void seleccionPorTorneo(T* poblacion, int nIndividuos, int nD
             descendiente.mutar();
         }
         descendencia[i] = descendiente;
+        aptA = -1; aptB = -1; progA = 0; progB = 0; //RESET del torneo
     }
 }
 
