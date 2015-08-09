@@ -42,7 +42,6 @@ template <class T> class MicraGENETIC{
 		double probabilidadMutacion;
 		//Atributos gestionados solo internamente para ahorrar calculos:
         int nDescendientes;
-        int nIndividuosYnDescendientes;
         T* poblacion;//Region de memoria para guardar los individuos de cada ciclo
         T* nuevaPoblacion;//Region de memoria para la poblacion del ciclo siguiente (mas consumo de memoria constante, menos reservas dinamicas)
         double valorTotalPoblacion;//Para asignar las porciones de la seleccion por ruleta. Se calcula conforme se van alterando las poblaciones
@@ -65,7 +64,6 @@ template <class T> MicraGENETIC<T>::MicraGENETIC(int nIndividuos, int nReproduct
 	this->nReproductores = nReproductores;
 	this->nDescendientes = nReproductores/2;
 	this->probabilidadMutacion = probabilidadMutacion;
-	this->nIndividuosYnDescendientes = nDescendientes + nIndividuos;
 	this->opSelector = opSelector;
 	this->tTorneo = tTorneo;
 }
@@ -176,7 +174,6 @@ template <class T> int MicraGENETIC<T>::getNIndividuos(){
 
 template <class T> void MicraGENETIC<T>::setNIndividuos(int nIndividuos){
 	this->nIndividuos = nIndividuos;
-	this->nIndividuosYnDescendientes = nIndividuos +  this->nDescendientes;
 }
 
 template <class T> int MicraGENETIC<T>::getNReproductores(){
@@ -186,7 +183,6 @@ template <class T> int MicraGENETIC<T>::getNReproductores(){
 template <class T> void MicraGENETIC<T>::setNReproductores(int nReproductores){
 	this->nDescendientes = nReproductores/2;
     this->nReproductores = nReproductores;
-	this->nIndividuosYnDescendientes = nIndividuos +  nDescendientes;
 }
 
 template <class T> double MicraGENETIC<T>::getProbabilidadMutacion(){
@@ -210,7 +206,7 @@ template <class T> void MicraGENETIC<T>::setTTorneo(int tTorneo){
 }
 
 template <class T> int MicraGENETIC<T>::getTTorneo(){
-    return tTorneo;
+	return tTorneo;
 }
 
 #endif
